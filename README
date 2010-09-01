@@ -1,0 +1,5 @@
+Hacksaw is an extension to Nokogiri.
+
+Hacksaw adds (better) support for:
+XML Schema
+XLink
