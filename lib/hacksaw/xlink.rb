@@ -7,7 +7,7 @@ module Hacksaw
 
     # This represents any XLink element
     module Element
-      include XML::Element
+      include Hacksaw::XML::Element
     
       # XLink element type attribute: type
       def xlink_type     # type MUST be defined in every type of link except simple; in simple links, either type or href MUST be specified

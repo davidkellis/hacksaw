@@ -468,19 +468,6 @@ module Hacksaw
     module Schema
       include Hacksaw::XML::Element
       
-      def self.load_document(filename, document_uri = nil)
-        file_contents = File.new(filename).read
-        document = Nokogiri.XML(file_contents, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
-        document.root.extend(self)
-        
-        # See http://www.w3schools.com/Schema/el_schema.asp
-        # For the xmlns attribute of the schema element is a:
-        # A URI reference that specifies one or more namespaces for use in this schema.
-        # If no prefix is assigned, the schema components of the namespace can be used with unqualified references
-        # document.root.default_namespace = NS_XSD unless document.root.namespaces.include?('xmlns')
-        document
-      end
-      
       def include_tags
         extend_children_with_tag(NS_XSD, 'include', Include)
       end

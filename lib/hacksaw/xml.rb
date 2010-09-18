@@ -33,6 +33,10 @@ module Hacksaw
     # Element should extend Nokogiri::XML::Node objects
     module Element
       module ClassMethods
+        def included(base)
+          base.extend(Hacksaw::XML::Element::ClassMethods)
+        end
+
         def load_document(filename, document_uri = nil)
           file_contents = File.new(filename).read
           document = Nokogiri.XML(file_contents, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
