@@ -4,613 +4,682 @@
 
 module Hacksaw
   module XML
-    NS_XS = 'http://www.w3.org/2001/XMLSchema'
-    
+
     module All
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def element
-        extend_children_with_tag(NS_XS, 'element', SchemaElement)
+      def element_tags
+        extend_children_with_tag(NS_XSD, 'element', SchemaElement)
       end
     end
     
     module Annotation
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def appInfo
-        extend_children_with_tag(NS_XS, 'appInfo', AppInfo)
+      def appInfo_tags
+        extend_children_with_tag(NS_XSD, 'appInfo', AppInfo)
       end
       
-      def documentation
-        extend_children_with_tag(NS_XS, 'documentation', Documentation)
+      def documentation_tags
+        extend_children_with_tag(NS_XSD, 'documentation', Documentation)
       end
     end
     
     module Any
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module AnyAttribute
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module AppInfo
-      include XML::Element
+      include Hacksaw::XML::Element
     end
     
     module Attribute
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
     end
     
     module AttributeGroup
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
       
-      def anyAttribute
-        extend_children_with_tag(NS_XS, 'anyAttribute', AnyAttribute)
+      def anyAttribute_tags
+        extend_children_with_tag(NS_XSD, 'anyAttribute', AnyAttribute)
       end
     end
     
     module Choice
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def element
-        extend_children_with_tag(NS_XS, 'element', SchemaElement)
+      def element_tags
+        extend_children_with_tag(NS_XSD, 'element', SchemaElement)
       end
 
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
 
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
       
-      def any
-        extend_children_with_tag(NS_XS, 'any', Any)
+      def any_tags
+        extend_children_with_tag(NS_XSD, 'any', Any)
       end
     end
 
     module ComplexContent
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def restriction
-        extend_children_with_tag(NS_XS, 'restriction', ComplexContentRestriction)
+      def restriction_tags
+        extend_children_with_tag(NS_XSD, 'restriction', ComplexContentRestriction)
       end
       
-      def extension
-        extend_children_with_tag(NS_XS, 'extension', Extension)
+      def extension_tags
+        extend_children_with_tag(NS_XSD, 'extension', Extension)
       end
     end
     
     module ComplexType
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def simpleContent
-        extend_children_with_tag(NS_XS, 'simpleContent', SimpleContent)
+      def simpleContent_tags
+        extend_children_with_tag(NS_XSD, 'simpleContent', SimpleContent)
       end
       
-      def complexContent
-        extend_children_with_tag(NS_XS, 'complexContent', ComplexContent)
+      def complexContent_tags
+        extend_children_with_tag(NS_XSD, 'complexContent', ComplexContent)
       end
 
-      def restriction
-        extend_children_with_tag(NS_XS, 'restriction', ComplexTypeRestriction)
+      def restriction_tags
+        extend_children_with_tag(NS_XSD, 'restriction', ComplexTypeRestriction)
       end
 
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
       
-      def all
-        extend_children_with_tag(NS_XS, 'all', All)
+      def all_tags
+        extend_children_with_tag(NS_XSD, 'all', All)
       end
       
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
 
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
 
-      def anyAttribute
-        extend_children_with_tag(NS_XS, 'anyAttribute', AnyAttribute)
+      def anyAttribute_tags
+        extend_children_with_tag(NS_XSD, 'anyAttribute', AnyAttribute)
       end
     end
     
     module Documentation
-      include XML::Element
+      include Hacksaw::XML::Element
     end
     
     module SchemaElement
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
       
-      def complexType
-        extend_children_with_tag(NS_XS, 'complexType', ComplexType)
+      def complexType_tags
+        extend_children_with_tag(NS_XSD, 'complexType', ComplexType)
       end
       
-      def unique
-        extend_children_with_tag(NS_XS, 'unique', Unique)
+      def unique_tags
+        extend_children_with_tag(NS_XSD, 'unique', Unique)
       end
       
-      def key
-        extend_children_with_tag(NS_XS, 'key', Key)
+      def key_tags
+        extend_children_with_tag(NS_XSD, 'key', Key)
       end
       
-      def keyref
-        extend_children_with_tag(NS_XS, 'keyref', Keyref)
+      def keyref_tags
+        extend_children_with_tag(NS_XSD, 'keyref', Keyref)
       end
     end
     
     module Extension
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
       
-      def all
-        extend_children_with_tag(NS_XS, 'all', All)
+      def all_tags
+        extend_children_with_tag(NS_XSD, 'all', All)
       end
       
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
       
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
 
-      def anyAttribute
-        extend_children_with_tag(NS_XS, 'anyAttribute', AnyAttribute)
+      def anyAttribute_tags
+        extend_children_with_tag(NS_XSD, 'anyAttribute', AnyAttribute)
       end
     end
     
     module Field
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module Group
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def all
-        extend_children_with_tag(NS_XS, 'all', All)
+      def all_tags
+        extend_children_with_tag(NS_XSD, 'all', All)
       end
       
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
     end
     
     module Import
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module Include
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module Key
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def selector
-        extend_children_with_tag(NS_XS, 'selector', Selector)
+      def selector_tags
+        extend_children_with_tag(NS_XSD, 'selector', Selector)
       end
 
-      def field
-        extend_children_with_tag(NS_XS, 'field', Field)
+      def field_tags
+        extend_children_with_tag(NS_XSD, 'field', Field)
       end
     end
 
     module Keyref
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def selector
-        extend_children_with_tag(NS_XS, 'selector', Selector)
+      def selector_tags
+        extend_children_with_tag(NS_XSD, 'selector', Selector)
       end
 
-      def field
-        extend_children_with_tag(NS_XS, 'field', Field)
+      def field_tags
+        extend_children_with_tag(NS_XSD, 'field', Field)
       end
     end
 
     module List
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
     end
     
     module Notation
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module Redefine
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
       
-      def complexType
-        extend_children_with_tag(NS_XS, 'complexType', ComplexType)
+      def complexType_tags
+        extend_children_with_tag(NS_XSD, 'complexType', ComplexType)
       end
       
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
     end
     
     module Restriction
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module SimpleTypeRestriction
       include Restriction
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
       
       # The following restrictions are documented at the following:
       # XSD Restrictions/Facets for Datatypes: http://www.w3schools.com/Schema/schema_elements_ref.asp
       
-      def minExclusive
+      def minExclusive_tags
       end
       
-      def minInclusive
+      def minInclusive_tags
       end
       
-      def maxExclusive
+      def maxExclusive_tags
       end
       
-      def maxInclusive
+      def maxInclusive_tags
       end
       
-      def totalDigits
+      def totalDigits_tags
       end
       
-      def fractionDigits
+      def fractionDigits_tags
       end
       
-      def length
+      def length_tags
       end
       
-      def minLength
+      def minLength_tags
       end
       
-      def maxLength
+      def maxLength_tags
       end
       
-      def enumeration
+      def enumeration_tags
       end
       
-      def whiteSpace
+      def whiteSpace_tags
       end
       
-      def pattern
+      def pattern_tags
       end
     end
     
     module SimpleContentRestriction
       include SimpleTypeRestriction
       
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
       
-      def anyAttribute
-        extend_children_with_tag(NS_XS, 'anyAttribute', AnyAttribute)
+      def anyAttribute_tags
+        extend_children_with_tag(NS_XSD, 'anyAttribute', AnyAttribute)
       end
     end
     
     module ComplexContentRestriction
       include Restriction
       
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
       
-      def all
-        extend_children_with_tag(NS_XS, 'all', All)
+      def all_tags
+        extend_children_with_tag(NS_XSD, 'all', All)
       end
       
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
 
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
       
-      def anyAttribute
-        extend_children_with_tag(NS_XS, 'anyAttribute', AnyAttribute)
+      def anyAttribute_tags
+        extend_children_with_tag(NS_XSD, 'anyAttribute', AnyAttribute)
       end
     end
 
     # Based off of http://www.w3schools.com/Schema/el_schema.asp
     module Schema
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def include
-        extend_children_with_tag(NS_XS, 'include', Include)
+      def self.load_document(filename, document_uri = nil)
+        file_contents = File.new(filename).read
+        document = Nokogiri.XML(file_contents, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
+        document.root.extend(self)
+        
+        # See http://www.w3schools.com/Schema/el_schema.asp
+        # For the xmlns attribute of the schema element is a:
+        # A URI reference that specifies one or more namespaces for use in this schema.
+        # If no prefix is assigned, the schema components of the namespace can be used with unqualified references
+        # document.root.default_namespace = NS_XSD unless document.root.namespaces.include?('xmlns')
+        document
       end
       
-      def import
-        extend_children_with_tag(NS_XS, 'import', Import)
+      def include_tags
+        extend_children_with_tag(NS_XSD, 'include', Include)
       end
       
-      def redefine
-        extend_children_with_tag(NS_XS, 'redefine', Redefine)
+      def import_tags
+        extend_children_with_tag(NS_XSD, 'import', Import)
       end
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def redefine_tags
+        extend_children_with_tag(NS_XSD, 'redefine', Redefine)
       end
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def complexType
-        extend_children_with_tag(NS_XS, 'complexType', ComplexType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
       
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def complexType_tags
+        extend_children_with_tag(NS_XSD, 'complexType', ComplexType)
       end
       
-      def attributeGroup
-        extend_children_with_tag(NS_XS, 'attributeGroup', AttributeGroup)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
       
-      def element
-        extend_children_with_tag(NS_XS, 'element', SchemaElement)
+      def attributeGroup_tags
+        extend_children_with_tag(NS_XSD, 'attributeGroup', AttributeGroup)
       end
       
-      def attribute
-        extend_children_with_tag(NS_XS, 'attribute', Attribute)
+      def element_tags
+        extend_children_with_tag(NS_XSD, 'element', SchemaElement)
       end
       
-      def notation
-        extend_children_with_tag(NS_XS, 'notation', Notation)
+      def attribute_tags
+        extend_children_with_tag(NS_XSD, 'attribute', Attribute)
+      end
+      
+      def notation_tags
+        extend_children_with_tag(NS_XSD, 'notation', Notation)
+      end
+      
+      # non-Schema items
+      
+      # The schema (http://www.w3.org/TR/xmlschema-1/#normative-schemaSchema) for XML Schema specifies
+      # that instances of XML Schema (i.e. schema documents that conform to XML Schema) can make unqualified references to
+      # the elements and attributes defined in the XML Schema specification. This is true because the attributes
+      # elementFormDefault and attributeFormDefault default to 'unqualified'.
+      #
+      # For the reason given in the above paragraph, we need to search for unqualified references to the substitutionGroup
+      # attribute of the 'element' element (which is defined in XML Schema).
+      def substitution_groups
+        element_tags.select {|n| n.has_attribute?('substitutionGroup') }.map {|n| n.attr('substitutionGroup') }.uniq
+      end
+
+      # Identifies element definitions that are a part of the given substitution group
+      #
+      # Arguments:
+      #   substitution_group_element_name - The head element tag name
+      #   substitution_group_element_ns - optional - The namespace URI which identifies the prefix that the
+      #                                              element tag name should be prefixed with.
+      #   include_head_element - optional - Should the returned list of element definitions include the head of the substitution group?
+      #
+      # Note: substitution_group_element_name may be prefixed, in which case substitution_group_element_ns should be nil. If
+      #       substitution_group_element_ns is not nil, then the prefix assocated with the substitution_group_element_ns will be
+      #       used as the element prefix when searching for members of the substitution group element definitions.
+      def elements_in_substitution_group(substitution_group_element_name, substitution_group_element_ns = nil, include_head_element = true)
+        sg_prefix, sg_tag_name = if substitution_group_element_ns.nil?
+          if substitution_group_element_name.index(':')
+            substitution_group_element_name.split(':', 2)
+          else
+            [nil, substitution_group_element_name]
+          end
+        else
+          [prefix_for(substitution_group_element_ns), substitution_group_element_name]
+        end
+        
+        group_elements = if sg_prefix.nil? || sg_prefix.empty?
+          children_with_attr('substitutionGroup', "#{sg_tag_name}").to_a
+        else
+          children_with_attr('substitutionGroup', "#{sg_prefix}:#{sg_tag_name}").to_a
+        end
+        
+        if include_head_element
+          # Return a new NodeSet built by merging the group_elements NodeSet and the NodeSet consisting of the substitution
+          # group head element.
+          
+          head_element_nodeset = if sg_prefix.nil?
+            qelements(sg_tag_name)
+          else
+            qelements(uri_for(sg_prefix), sg_tag_name)
+          end
+          
+          group_elements | head_element_nodeset
+        else
+          group_elements
+        end
       end
     end
     
     module Selector
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
     end
     
     module Sequence
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def element
-        extend_children_with_tag(NS_XS, 'element', SchemaElement)
+      def element_tags
+        extend_children_with_tag(NS_XSD, 'element', SchemaElement)
       end
 
-      def group
-        extend_children_with_tag(NS_XS, 'group', Group)
+      def group_tags
+        extend_children_with_tag(NS_XSD, 'group', Group)
       end
 
-      def choice
-        extend_children_with_tag(NS_XS, 'choice', Choice)
+      def choice_tags
+        extend_children_with_tag(NS_XSD, 'choice', Choice)
       end
       
-      def sequence
-        extend_children_with_tag(NS_XS, 'sequence', Sequence)
+      def sequence_tags
+        extend_children_with_tag(NS_XSD, 'sequence', Sequence)
       end
       
-      def any
-        extend_children_with_tag(NS_XS, 'any', Any)
+      def any_tags
+        extend_children_with_tag(NS_XSD, 'any', Any)
       end
     end
     
     module SimpleContent
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def restriction
-        extend_children_with_tag(NS_XS, 'restriction', SimpleContentRestriction)
+      def restriction_tags
+        extend_children_with_tag(NS_XSD, 'restriction', SimpleContentRestriction)
       end
       
-      def extension
-        extend_children_with_tag(NS_XS, 'extension', Extension)
+      def extension_tags
+        extend_children_with_tag(NS_XSD, 'extension', Extension)
       end
     end
     
     module SimpleType
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def restriction
-        extend_children_with_tag(NS_XS, 'restriction', SimpleTypeRestriction)
+      def restriction_tags
+        extend_children_with_tag(NS_XSD, 'restriction', SimpleTypeRestriction)
       end
       
-      def list
-        extend_children_with_tag(NS_XS, 'list', List)
+      def list_tags
+        extend_children_with_tag(NS_XSD, 'list', List)
       end
       
-      def union
-        extend_children_with_tag(NS_XS, 'union', Union)
+      def union_tags
+        extend_children_with_tag(NS_XSD, 'union', Union)
       end
     end
     
     module Union
-      include XML::Element
+      include Hacksaw::XML::Element
       
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
       
-      def simpleType
-        extend_children_with_tag(NS_XS, 'simpleType', SimpleType)
+      def simpleType_tags
+        extend_children_with_tag(NS_XSD, 'simpleType', SimpleType)
       end
     end
     
     module Unique
-      include XML::Element
+      include Hacksaw::XML::Element
 
-      def annotation
-        extend_children_with_tag(NS_XS, 'annotation', Annotation)
+      def annotation_tags
+        extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
 
-      def selector
-        extend_children_with_tag(NS_XS, 'selector', Selector)
+      def selector_tags
+        extend_children_with_tag(NS_XSD, 'selector', Selector)
       end
 
-      def field
-        extend_children_with_tag(NS_XS, 'field', Field)
+      def field_tags
+        extend_children_with_tag(NS_XSD, 'field', Field)
       end
     end
   end

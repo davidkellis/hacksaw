@@ -1,10 +1,21 @@
+require 'uuidtools'
 
 module Hacksaw
   module XML
+    UNIQUE_PREFIX = UUIDTools::UUID.random_create.to_i.to_s
+    
     NS_XML = 'http://www.w3.org/XML/1998/namespace'
     NS_XSD = 'http://www.w3.org/2001/XMLSchema'
-
+    NS_XSI = 'http://www.w3.org/2001/XMLSchema-instance'
+    
     module Document
+      def self.load(filename, document_uri = nil)
+        file_contents = File.new(filename).read
+        document = Nokogiri.XML(file_contents, document_uri).extend(self)      # returns a Nokogiri::XML::Document
+        document.root.extend(Element)
+        document
+      end
+      
       def self.extend_object(document)
         if document.is_a? Nokogiri::XML::Document
           super
@@ -24,7 +35,7 @@ module Hacksaw
       module ClassMethods
         def load_document(filename, document_uri = nil)
           file_contents = File.new(filename).read
-          document = Nokogiri.XML(file_contents, document_uri).extend(XmlDocument)      # returns a Nokogiri::XML::Document
+          document = Nokogiri.XML(file_contents, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
           document.root.extend(self)
           document
         end
@@ -83,49 +94,74 @@ module Hacksaw
           namespaces_by_uri()[ns_uri].prefix || ""       # namespace.prefix returns nil if there is no prefix defined (default prefix)
         end
       end
-
-      # construct the namespace-prefix-qualified name given the document's namespaces
-      def qname(ns_uri, name)
-        prefix = prefix_for(ns_uri)
-        raise "Namespace at URI=#{ns_uri} not referenced!" if prefix.nil?
-        if prefix.empty?
-          "#{name}"
-        else
-          "#{prefix}:#{name}"
+      
+      # returns the URI of the namespace referenced by the given prefix
+      # returns nil if none of the namespaces reference the given prefix
+      def uri_for(prefix)
+        if namespaces_by_prefix().has_key?(prefix)
+          namespaces_by_prefix()[prefix].href
         end
       end
 
-      def qelements(ns_uri, tag)
-        tag = qname(ns_uri, tag)
-        xpath("./#{tag}")
+      # Construct the namespace-prefix-qualified name given the document's namespaces
+      # Deprecated: If the namespace isn't referenced, return an unqualified name.
+      #
+      # Returns a pair of the following form [element-name, prefix_to_URI-hash]
+      # Example: ["prefix:name", {prefix => ns_uri}]
+      def qname(ns_uri, name)
+        prefix = prefix_for(ns_uri)
+        
+        raise "Namespace at URI=#{ns_uri} not referenced!" if prefix.nil?
+        
+        # if the ns_uri isn't referenced, then treat the name as an unqualified name.
+        # if prefix.nil?
+        #   [name, {}]
+        # else
+          prefix = UNIQUE_PREFIX if prefix.empty?
+          ["#{prefix}:#{name}", {prefix => ns_uri}]
+        # end
       end
-  
+
+      def qelements(ns_uri = nil, tag)
+        tag, ns_map = if ns_uri
+          qname(ns_uri, tag)
+        else
+          [tag, {}]
+        end
+        xpath("./#{tag}", ns_map)
+      end
+
       # I think this does the same thing as a call to attribute_with_ns(attribute_name, ns)
       def qattr(ns, attribute_name)
-        attr_name = qname(ns, attribute_name)
-        attribute = xpath("@#{attr_name}").first    # this should return a Nokogiri::XML::Attr object if the attribute exists
+        attr_name, ns_map = qname(ns, attribute_name)
+        attribute = xpath("@#{attr_name}", ns_map).first    # this should return a Nokogiri::XML::Attr object if the attribute exists
         attribute.value if attribute
       end
-      
+
       # Usage:
       # node1.extend_children_with_tag(NS_LINK, 'roleRef', RoleRef)
       # -> [child_node1, child_node2, ...]
       # where each of the child_nodeN objects are extended with RoleRef
+      # Returns an array of child nodes (of the current root node), each of which is extended with mod
       def extend_children_with_tag(ns_uri, tag, mod)
         qelements(ns_uri, tag).to_a.map {|n| n.extend(mod) }
       end
-      
+
       # Usage:
-      # node1.extend_children_with_attr(NS_XLINK, 'type', 'arc', Arc)
+      # node1.extend_children_with_qattr(NS_XLINK, 'type', 'arc', Arc)
       # -> [child_node1, child_node2, ...]
       # where each of the child_nodeN objects are extended with Arc
-      def extend_children_with_attr(ns_uri, attribute, attribute_value, mod)
-        children_with_attr(ns_uri, attribute, attribute_value).to_a.map {|n| n.extend(mod) }
+      def extend_children_with_qattr(ns_uri, attribute, attribute_value, mod)
+        children_with_qattr(ns_uri, attribute, attribute_value).to_a.map {|n| n.extend(mod) }
       end
-      
-      def children_with_attr(ns_uri, attribute, attribute_value)
-        attr_name = qname(ns_uri, attribute)
-        xpath("./*[@#{attr_name}='#{attribute_value}']")
+
+      def children_with_attr(attribute, attribute_value)
+        xpath("./*[@#{attribute}='#{attribute_value}']")
+      end
+
+      def children_with_qattr(ns_uri, attribute, attribute_value)
+        attr_name, ns_map = qname(ns_uri, attribute)
+        xpath("./*[@#{attr_name}='#{attribute_value}']", ns_map)
       end
     end
   end
