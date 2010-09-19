@@ -11,14 +11,14 @@ class TestSchema < Test::Unit::TestCase
     # pp doc.root.element_tags
 
     path = File.join(File.expand_path(File.dirname(__FILE__)), 'xbrl-instance-2003-12-31.xsd')
-    doc = Hacksaw::XML::Schema.load_document(path, path)
+    doc = Hacksaw::XML::Schema.load_document(File.read(path), path)
     
     assert_equal 10, doc.root.element_tags.count
   end
   
   def test_taxonomy_schema
     path = File.join(File.expand_path(File.dirname(__FILE__)), 'us-gaap-2009-01-31.xsd')
-    doc = Hacksaw::XML::Schema.load_document(path, path)
+    doc = Hacksaw::XML::Schema.load_document(File.read(path), path)
     
     # pp doc.root.substitution_groups
     # pp doc.root.elements_in_substitution_group('item', 'http://www.xbrl.org/2003/instance').count

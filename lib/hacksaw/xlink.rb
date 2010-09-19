@@ -64,8 +64,8 @@ module Hacksaw
         LegacyExtendedIRI.new(super).to_target(base)
       end
 
-      def titles
-        extend_children_with_attr(NS_XLINK, 'type', 'title', Title)
+      def title_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'title', Title)
       end
     end
   
@@ -73,8 +73,8 @@ module Hacksaw
     module Arc
       include Element
 
-      def titles
-        extend_children_with_attr(NS_XLINK, 'type', 'title', Title)
+      def title_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'title', Title)
       end
 
       def linkbase?
@@ -89,26 +89,26 @@ module Hacksaw
     module Link
       include Element
     end
-  
+
     module ExtendedLink
       include Link
     
       # xlink:type MUST be "extended"
     
-      def resources
-        extend_children_with_attr(NS_XLINK, 'type', 'resource', Resource)
+      def resource_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'resource', Resource)
       end
     
-      def locators
-        extend_children_with_attr(NS_XLINK, 'type', 'locator', Locator)
+      def locator_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'locator', Locator)
       end
     
-      def arcs
-        extend_children_with_attr(NS_XLINK, 'type', 'arc', Arc)
+      def arc_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'arc', Arc)
       end
 
-      def titles
-        extend_children_with_attr(NS_XLINK, 'type', 'title', Title)
+      def title_tags
+        extend_children_with_qattr(NS_XLINK, 'type', 'title', Title)
       end
     end
   

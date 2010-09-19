@@ -9,9 +9,9 @@ module Hacksaw
     NS_XSI = 'http://www.w3.org/2001/XMLSchema-instance'
     
     module Document
-      def self.load(filename, document_uri = nil)
-        file_contents = File.new(filename).read
-        document = Nokogiri.XML(file_contents, document_uri).extend(self)      # returns a Nokogiri::XML::Document
+      # readable_obj is some object that returns a string when its read() method is called.
+      def self.load(document_string, document_uri = nil)
+        document = Nokogiri.XML(document_string, document_uri).extend(self)      # returns a Nokogiri::XML::Document
         document.root.extend(Element)
         document
       end
@@ -37,9 +37,9 @@ module Hacksaw
           base.extend(Hacksaw::XML::Element::ClassMethods)
         end
 
-        def load_document(filename, document_uri = nil)
-          file_contents = File.new(filename).read
-          document = Nokogiri.XML(file_contents, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
+        # readable_obj is some object that returns a string when its read() method is called.
+        def load_document(document_string, document_uri = nil)
+          document = Nokogiri.XML(document_string, document_uri).extend(Document)      # returns a Nokogiri::XML::Document
           document.root.extend(self)
           document
         end
