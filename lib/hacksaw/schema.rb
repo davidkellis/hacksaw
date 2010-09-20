@@ -271,7 +271,23 @@ module Hacksaw
     
     module Import
       include Hacksaw::XML::Element
+
+      def namespace_uri
+        LegacyExtendedIRI.new(namespace_attr)
+      end
       
+      def schema_location_uri
+        LegacyExtendedIRI.new(schema_location_attr)
+      end
+
+      def namespace_attr
+        attr('namespace')
+      end
+      
+      def schema_location_attr
+        attr('schemaLocation')
+      end
+
       def annotation_tags
         extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
@@ -279,7 +295,15 @@ module Hacksaw
     
     module Include
       include Hacksaw::XML::Element
-      
+
+      def schema_location_uri
+        LegacyExtendedIRI.new(schema_location_attr)
+      end
+
+      def schema_location_attr
+        attr('schemaLocation')
+      end
+
       def annotation_tags
         extend_children_with_tag(NS_XSD, 'annotation', Annotation)
       end
